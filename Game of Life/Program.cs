@@ -10,38 +10,31 @@ namespace Game_of_Life
     {
         static void Main(string[] args)
         {
-            //Game hola = new Game("fitxer.txt");
-            //Console.WriteLine("Fes un enter per acabar, qualsevol tecla per continuar");
-            //hola.TaulerRandom();
-            //Console.WriteLine(hola.TaulerSeguent());
-            //while (Console.ReadKey().KeyChar != 13)
-            //{
-            //    Console.Clear();
-            //    Console.WriteLine(hola.TaulerSeguent());
-            //    Console.WriteLine(hola.Iteracio);
-            //    hola.Seguent();
-            //}
-            //hola.GuardarEstat("fitxer.txt2");
-            //Console.WriteLine(hola.TaulerSeguent());
-            //Console.ReadKey();
+            Game hola = new Game();
+            Console.WriteLine("Fes un enter per acabar, qualsevol tecla per continuar");// hola.TaulerRandom();
+            Console.WriteLine(hola.TaulerSeguent());
+            while (Console.ReadKey().KeyChar != 13)
+            {
+                Console.Clear();
+                Console.WriteLine(hola.TaulerSeguent());
+                Console.WriteLine(hola.Iteracio);
+                hola.Seguent();
+            }
+            hola.GuardarEstat("fitxer.txt2");
+            Console.WriteLine(hola.TaulerSeguent());
+            Console.ReadKey();
 
-            bool[,] tauler = { { false, false, false, false }, { false, true, false, true }, { false, false, true, false }, { false, false, false, false } };
-            bool result;
-            Game partida = new Game();
-            partida.Tauler = tauler;
-            result = partida.Viu(1, 2);
-            Console.WriteLine(true == result);
-            Console.WriteLine(partida.TaulerSeguent());
-            result = partida.Viu( 2, 2);
-            Console.WriteLine(true == result);
-            Console.Read();
         }
     }
     public class Game
     {
         #region atributs
         private static int iteracio = 0;
-        private bool[,] tauler;
+        private bool[,] tauler = {
+                { false, false, false, false },
+                { false, true, false, true },
+                { false, false, true, false },
+                { false, false, false, false } };
         #endregion
         #region propietats
         public int Iteracio
@@ -140,7 +133,7 @@ namespace Game_of_Life
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    if (!(i != 0 && j != 0))
+                    if ((i != 0 && j != 0))
                     {
                         try
                         {
@@ -156,17 +149,11 @@ namespace Game_of_Life
             //{
             //    return true;
             //}
-            //else if (!tauler[x, y] && veins == 3) // zombification
-            //{
-            //    return true;
-            //}
 
-            if (tauler[x, y] == true)
+            if (tauler[x, y]&& (veins == 3 || veins == 2))
             {
-                if (veins < 2) return false;
-                if (veins > 3) return false;
-                if (veins == 3 || veins == 2) return true;
-                return false;
+                return true;
+                
             }
             if (tauler[x, y] == false && veins == 3) return true;
             return false;

@@ -46,14 +46,18 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestCelulaViu()
         {
-            bool[,] tauler = { { false, false, false, false }, { false, true, false, true }, { false, false, true, false }, { false, false, false, false } };
+            bool[,] tauler = { 
+                { false, false, false, false }, 
+                { false, true, false, true }, 
+                { false, false, true, false }, 
+                { false, false, false, false } };
             bool result;
             Game partida = new Game();
             partida.Tauler = tauler;
             result = partida.Viu(1, 2);
             Assert.AreEqual(true, result);
             result = partida.Viu(2, 2);
-            Assert.AreEqual(false, result);
+            Assert.AreEqual(true, result);
         }
     }
 }
